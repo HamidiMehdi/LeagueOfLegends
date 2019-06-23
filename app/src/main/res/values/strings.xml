@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">League Of Legends</string>
+
+    <!-- searchPlayer -->
+    <string name="region_player">Region</string>
+    <string name="player_name">Player name</string>
+
+
+    <string name="search">Search</string>
+    <string name="et_error_empty">This field cannot be empty</string>
+    <string name="player_not_found">Player not found</string>
+
+
+    <string name="error_volley">Volley error</string>
+    <string name="error_network">Network error</string>
+
+</resources>
