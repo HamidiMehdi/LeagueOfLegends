@@ -1,10 +1,12 @@
 package com.quizzy.mrk.leagueoflegends;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -43,6 +45,7 @@ public class SearchPlayerActivity extends AppCompatActivity {
                 searchPlayer();
             }
         });
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }
 
     private void hydrateRegionList() {
@@ -53,12 +56,19 @@ public class SearchPlayerActivity extends AppCompatActivity {
 
     private void searchPlayer() {
         if (this.check()) {
+
+            final ProgressDialog pDialog = new ProgressDialog(this);
+            pDialog.setCancelable(false);
+            pDialog.setMessage(getString(R.string.search));
+            pDialog.show();
+
             this.searchRequest.searchPlayerRequest(RegionEnum.getRegion(
                     this.spRegion.getSelectedItem().toString()),
                     this.etPlayerName.getText().toString().trim(),
                     new SearchPlayer.SearchPlayerCallback() {
                         @Override
                         public void onSuccess(Player player) {
+                            pDialog.hide();
                             Bundle paquet = new Bundle();
                             paquet.putParcelable("player", player);
                             Intent intent = new Intent(SearchPlayerActivity.this, GameHistoryActivity.class);
@@ -68,6 +78,7 @@ public class SearchPlayerActivity extends AppCompatActivity {
 
                         @Override
                         public void dontExist() {
+                            pDialog.hide();
                             Snackbar snackbar = Snackbar
                                     .make(findViewById(R.id.activity_search_player), R.string.player_not_found, 2500);
                             snackbar.show();
@@ -75,15 +86,19 @@ public class SearchPlayerActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorNetwork() {
+                            pDialog.hide();
                             Snackbar snackbar = Snackbar
                                     .make(findViewById(R.id.activity_search_player), R.string.error_network, 2500);
-                            snackbar.show();                        }
+                            snackbar.show();
+                        }
 
                         @Override
                         public void onErrorVollet() {
+                            pDialog.hide();
                             Snackbar snackbar = Snackbar
                                     .make(findViewById(R.id.activity_search_player), R.string.error_volley, 2500);
-                            snackbar.show();                        }
+                            snackbar.show();
+                        }
                     }
             );
         }

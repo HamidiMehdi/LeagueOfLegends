@@ -20,54 +20,52 @@ import org.json.JSONObject;
 
 public class SearchPlayer {
 
-    private Context context;
     private RequestQueue queue;
 
     public SearchPlayer(Context context) {
-        this.context = context;
         this.queue = VolleySingleton.getInstance(context).getRequestQueue();
     }
 
     public void searchPlayerRequest(final String region, final String namePlayer, final SearchPlayerCallback callBack) {
         Log.d("APP", ApiRequest.getUrl(region) + "lol/summoner/v4/summoners/by-name/" + namePlayer + "?api_key=" + ApiRequest.API_KEY);
-         JsonObjectRequest request = new JsonObjectRequest(
-                 Request.Method.GET,
-                 ApiRequest.getUrl(region) + "lol/summoner/v4/summoners/by-name/" + namePlayer + "?api_key=" + ApiRequest.API_KEY,
-                 new Response.Listener<JSONObject>() {
-                     @Override
-                     public void onResponse(JSONObject response) {
-                         Log.d("APP", "Player recupéré ==> " + response.toString());
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                ApiRequest.getUrl(region) + "lol/summoner/v4/summoners/by-name/" + namePlayer + "?api_key=" + ApiRequest.API_KEY,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.d("APP", "Player recupéré ==> " + response.toString());
 
-                         try {
+                        try {
                             Player player = new Player(
                                     response.getString("id"),
                                     response.getString("accountId"),
                                     response.getString("puuid"),
                                     response.getString("name"),
-                                    ApiRequest.getUrl(region),
+                                    region,
                                     response.getInt("profileIconId"),
                                     response.getInt("revisionDate"),
                                     response.getInt("summonerLevel")
                             );
                             callBack.onSuccess(player);
-                         } catch (JSONException e) {
-                             e.printStackTrace();
-                         }
-                     }
-                 },
-                 new Response.ErrorListener() {
-                     @Override
-                     public void onErrorResponse(VolleyError error) {
-                         if (error instanceof ServerError) {
-                             callBack.dontExist();
-                         } else if (error instanceof VolleyError) {
-                             callBack.onErrorVollet();
-                         } else if (error instanceof NetworkError) {
-                             callBack.onErrorNetwork();
-                         }
-                     }
-                 }
-         );
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        if (error instanceof ServerError) {
+                            callBack.dontExist();
+                        } else if (error instanceof VolleyError) {
+                            callBack.onErrorVollet();
+                        } else if (error instanceof NetworkError) {
+                            callBack.onErrorNetwork();
+                        }
+                    }
+                }
+        );
         request.setRetryPolicy(new DefaultRetryPolicy(10000, 1, 1.0f));
         queue.add(request);
     }
