@@ -6,4 +6,7 @@
     <color name="white">#CDCFCA</color>
     <color name="dark">#343B3B</color>
     <color name="brown">#997441</color>
+    <color name="red">#FF0000</color>
+    <color name="pressed">#2affffff</color>
+    <color name="green">#8BC34A</color>
 </resources>

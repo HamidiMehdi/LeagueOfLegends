@@ -94,16 +94,15 @@ public class GameHistoryActivity extends AppCompatActivity {
     }
 
     private void updateHistoryList() {
-        HiostoryGamesAdapter adapter = new HiostoryGamesAdapter(GameHistoryActivity.this);
+        HistoryGamesAdapter adapter = new HistoryGamesAdapter(GameHistoryActivity.this);
         this.lvHistoryGames.setAdapter(adapter);
     }
 
 
-
-    class HiostoryGamesAdapter extends ArrayAdapter<GameStat> {
+    class HistoryGamesAdapter extends ArrayAdapter<GameStat> {
         LayoutInflater inflater;
 
-        public HiostoryGamesAdapter(Activity context) {
+        public HistoryGamesAdapter(Activity context) {
             super(context, R.layout.adapter_history_game, gamesStat);
             inflater = LayoutInflater.from(context);
         }
@@ -115,8 +114,27 @@ public class GameHistoryActivity extends AppCompatActivity {
                 vItem = getLayoutInflater().inflate(R.layout.adapter_history_game, parent, false);
             }
 
-            ImageView ivChampion = vItem.findViewById(R.id.iv_champion);
-            Picasso.with(getContext()).load(gamesStat.get(position).getGame().getChampion().getUrlImageChampion()).into(ivChampion);
+            GameStat gameStat = gamesStat.get(position);
+
+            View view = vItem.findViewById(R.id.win_or_lose);
+            if (gameStat.isWin()) {  // a revoir
+                view.setBackgroundColor(getResources().getColor(R.color.green));
+            } else {
+                view.setBackgroundColor(getResources().getColor(R.color.red));
+            }
+
+            ImageView ivChampion = vItem.findViewById(R.id.iv_portrait);
+            Picasso.with(getContext()).load(gameStat.getGame().getChampion().getUrlImageChampion()).into(ivChampion);
+
+//            TextView tvTypeMatch = findViewById(R.id.tv_type_match);
+//            tvTypeMatch.setText(gameStat.getGameMode() + "");
+//
+//            TextView tvKda = findViewById(R.id.tv_kda);
+//            tvKda.setText(gameStat.getKill() + "/" + gameStat.getDeath() + "/" + gameStat.getAssist());
+//
+//            TextView tvGold = findViewById(R.id.tv_gold);
+//            tvGold.setText(gameStat.getGold());
+
 
             return vItem;
         }

@@ -41,10 +41,10 @@ public class GameStatRequest {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        Log.d("APP", "game stat recupérées ==> " + response.toString());
                         try {
                             int participantId = getParticipantId(player, response.getJSONArray("participantIdentities"));
                             int champLevel = 0, gold = 0, kill = 0, death = 0, assist = 0;
+                            boolean win = false;
                             ArrayList<Spell> spells = new ArrayList<>();
                             ArrayList<String> items = new ArrayList<>();
                             ArrayList<Champion> teamWin = new ArrayList<>();
@@ -85,6 +85,7 @@ public class GameStatRequest {
                                     spells.add(SpellService.getSpellService().getSpell(participant.getInt("spell1Id")));
                                     spells.add(SpellService.getSpellService().getSpell(participant.getInt("spell2Id")));
 
+                                    win = stat.getBoolean("win");
                                     champLevel = stat.getInt("champLevel");
                                     gold = stat.getInt("goldEarned");
                                     kill = stat.getInt("kills");
@@ -102,11 +103,14 @@ public class GameStatRequest {
                                     kill,
                                     death,
                                     assist,
+                                    win,
                                     spells,
                                     items,
                                     teamWin,
                                     teamLose
                             );
+
+                            Log.d("APP", gameStat.toString());
 
                             callBack.onSuccess(gameStat);
                         } catch (JSONException e) {

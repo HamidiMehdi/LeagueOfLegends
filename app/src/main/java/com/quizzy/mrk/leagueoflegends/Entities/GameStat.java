@@ -12,14 +12,15 @@ public class GameStat {
     private int kill;
     private int death;
     private int assist;
+    private boolean win;
     private ArrayList<Spell> spells;
     private ArrayList<String> items;
     private ArrayList<Champion> teamWin;
     private ArrayList<Champion> teamLose;
 
-    public GameStat(Game game, int gameDuration, String gameMode, int champLevel, int gold, int kill,
-                    int death, int assist, ArrayList<Spell> spells, ArrayList<String> items,
-                    ArrayList<Champion> teamWin, ArrayList<Champion> teamLose) {
+    public GameStat(Game game, int gameDuration, String gameMode, int champLevel, int gold,
+                    int kill, int death, int assist, boolean win, ArrayList<Spell> spells,
+                    ArrayList<String> items, ArrayList<Champion> teamWin, ArrayList<Champion> teamLose) {
         this.game = game;
         this.gameDuration = gameDuration;
         this.gameMode = gameMode;
@@ -28,6 +29,7 @@ public class GameStat {
         this.kill = kill;
         this.death = death;
         this.assist = assist;
+        this.win = win;
         this.spells = spells;
         this.items = items;
         this.teamWin = teamWin;
@@ -98,6 +100,14 @@ public class GameStat {
         this.assist = assist;
     }
 
+    public boolean isWin() {
+        return win;
+    }
+
+    public void setWin(boolean win) {
+        this.win = win;
+    }
+
     public ArrayList<Spell> getSpells() {
         return spells;
     }
@@ -128,5 +138,24 @@ public class GameStat {
 
     public void setTeamLose(ArrayList<Champion> teamLose) {
         this.teamLose = teamLose;
+    }
+
+    @Override
+    public String toString() {
+        return "GameStat{" +
+                "game=" + game +
+                ", gameDuration=" + gameDuration +
+                ", gameMode='" + gameMode + '\'' +
+                ", ChampLevel=" + ChampLevel +
+                ", gold=" + gold +
+                ", kill=" + kill +
+                ", death=" + death +
+                ", assist=" + assist +
+                ", win=" + win +
+                ", spells=" + spells +
+                ", items=" + items +
+                ", teamWin=" + teamWin +
+                ", teamLose=" + teamLose +
+                '}';
     }
 }
