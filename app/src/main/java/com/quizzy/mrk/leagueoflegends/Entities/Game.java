@@ -5,14 +5,14 @@ import android.os.Parcelable;
 
 public class Game implements Parcelable {
 
-    protected String platformId;
-    protected int gameId;
-    protected int champion;
-    protected int queue;
-    protected int season;
-    protected int timestamp;
-    protected String role;
-    protected String lane;
+    private String platformId;
+    private int gameId;
+    private int champion;
+    private int queue;
+    private int season;
+    private int timestamp;
+    private String role;
+    private String lane;
 
     public Game(String platformId, int gameId, int champion, int queue, int season, int timestamp, String role, String lane) {
         this.platformId = platformId;

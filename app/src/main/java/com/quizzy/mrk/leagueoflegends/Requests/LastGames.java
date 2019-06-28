@@ -69,7 +69,7 @@ public class LastGames {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         if (error instanceof VolleyError) {
-                            callBack.onErrorVollet();
+                            callBack.onErrorVolley();
                         } else if (error instanceof NetworkError) {
                             callBack.onErrorNetwork();
                         }
@@ -85,7 +85,7 @@ public class LastGames {
 
         void onErrorNetwork();
 
-        void onErrorVollet();
+        void onErrorVolley();
     }
 }
 

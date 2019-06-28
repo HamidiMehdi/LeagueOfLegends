@@ -14,6 +14,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.quizzy.mrk.leagueoflegends.Application.ApiRequest;
 import com.quizzy.mrk.leagueoflegends.Application.VolleySingleton;
 import com.quizzy.mrk.leagueoflegends.Entities.Player;
+import com.quizzy.mrk.leagueoflegends.Services.SessionService;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,7 +48,10 @@ public class SearchPlayer {
                                     response.getInt("revisionDate"),
                                     response.getInt("summonerLevel")
                             );
-                            callBack.onSuccess(player);
+
+                            SessionService.close();
+                            SessionService.open(player);
+                            callBack.onSuccess();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -59,7 +63,7 @@ public class SearchPlayer {
                         if (error instanceof ServerError) {
                             callBack.dontExist();
                         } else if (error instanceof VolleyError) {
-                            callBack.onErrorVollet();
+                            callBack.onErrorVolley();
                         } else if (error instanceof NetworkError) {
                             callBack.onErrorNetwork();
                         }
@@ -71,9 +75,9 @@ public class SearchPlayer {
     }
 
     public interface SearchPlayerCallback {
-        void onSuccess(Player player);
+        void onSuccess();
         void dontExist();
         void onErrorNetwork();
-        void onErrorVollet();
+        void onErrorVolley();
     }
 }

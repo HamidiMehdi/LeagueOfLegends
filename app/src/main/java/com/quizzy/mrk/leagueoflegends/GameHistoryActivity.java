@@ -6,15 +6,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.quizzy.mrk.leagueoflegends.Entities.Champion;
 import com.quizzy.mrk.leagueoflegends.Entities.Game;
-import com.quizzy.mrk.leagueoflegends.Entities.Player;
+import com.quizzy.mrk.leagueoflegends.Entities.Spell;
 import com.quizzy.mrk.leagueoflegends.Requests.LastGames;
+import com.quizzy.mrk.leagueoflegends.Services.ChampionService;
+import com.quizzy.mrk.leagueoflegends.Services.SessionService;
+import com.quizzy.mrk.leagueoflegends.Services.SpellService;
 
 import java.util.ArrayList;
 
 public class GameHistoryActivity extends AppCompatActivity {
 
-    private Player player;
     private TextView tvPlayer;
     private ArrayList<Game> games;
 
@@ -26,22 +29,20 @@ public class GameHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_history);
 
         this.tvPlayer = findViewById(R.id.test);
-        this.player = getIntent().getExtras().getParcelable("player");
 
-        this.tvPlayer.setText(this.player.toString());
+        this.tvPlayer.setText(SessionService.getSession().getPlayer().toString());
 
         this.lastGamesRequest = new LastGames(this);
-
 
         this.getLastGames();
     }
 
     private void getLastGames() {
-        this.lastGamesRequest.getTwentyLastGamesRequest(this.player, new LastGames.LastGamesCallback() {
+        this.lastGamesRequest.getTwentyLastGamesRequest(SessionService.getSession().getPlayer(), new LastGames.LastGamesCallback() {
             @Override
             public void onSuccess(ArrayList<Game> listGames) {
                 games = listGames;
-                Log.d("APP", "nb => " + games.size());
+                getGamesStat();
             }
 
             @Override
@@ -52,11 +53,19 @@ public class GameHistoryActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onErrorVollet() {
+            public void onErrorVolley() {
                 Snackbar snackbar = Snackbar
                         .make(findViewById(R.id.activity_game_history), R.string.error_volley, 2500);
                 snackbar.show();
             }
         });
+    }
+
+    private void getGamesStat() {
+        Champion champ = ChampionService.getChampionService().getChampion(58);
+        Log.d("APP", champ.toString());
+
+        Spell spell = SpellService.getSpellService().getSpell(12);
+        Log.d("APP", spell.toString());
     }
 }

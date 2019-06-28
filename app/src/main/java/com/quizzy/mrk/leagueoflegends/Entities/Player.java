@@ -57,6 +57,10 @@ public class Player implements Parcelable {
         return summonerLevel;
     }
 
+    public String getUrlProfilIcon() {
+        return "http://ddragon.leagueoflegends.com/cdn/6.24.1/img/profileicon/" + this.profileIconId + ".png";
+    }
+
     @Override
     public String toString() {
         return "Player{" +
