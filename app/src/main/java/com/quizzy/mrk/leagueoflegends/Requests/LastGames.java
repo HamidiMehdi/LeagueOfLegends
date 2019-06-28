@@ -14,6 +14,7 @@ import com.quizzy.mrk.leagueoflegends.Application.ApiRequest;
 import com.quizzy.mrk.leagueoflegends.Application.VolleySingleton;
 import com.quizzy.mrk.leagueoflegends.Entities.Game;
 import com.quizzy.mrk.leagueoflegends.Entities.Player;
+import com.quizzy.mrk.leagueoflegends.Services.ChampionService;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,15 +42,13 @@ public class LastGames {
 
                         try {
                             JSONArray games = response.getJSONArray("matches");
-
                             for (int i = 0; i < games.length(); i++) {
                                 JSONObject game = (JSONObject) games.get(i);
-
                                 listGames.add(
                                         new Game(
                                                 game.getString("platformId"),
-                                                game.getInt("gameId"),
-                                                game.getInt("champion"),
+                                                game.getLong("gameId"),
+                                                ChampionService.getChampionService().getChampion(game.getInt("champion")),
                                                 game.getInt("queue"),
                                                 game.getInt("season"),
                                                 game.getInt("timestamp"),
@@ -76,7 +75,6 @@ public class LastGames {
                     }
                 }
         );
-        request.setRetryPolicy(new DefaultRetryPolicy(10000, 1, 1.0f));
         queue.add(request);
     }
 

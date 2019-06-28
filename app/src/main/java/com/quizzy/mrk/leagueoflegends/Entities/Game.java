@@ -6,15 +6,15 @@ import android.os.Parcelable;
 public class Game implements Parcelable {
 
     private String platformId;
-    private int gameId;
-    private int champion;
+    private long gameId;
+    private Champion champion;
     private int queue;
     private int season;
     private int timestamp;
     private String role;
     private String lane;
 
-    public Game(String platformId, int gameId, int champion, int queue, int season, int timestamp, String role, String lane) {
+    public Game(String platformId, long gameId, Champion champion, int queue, int season, int timestamp, String role, String lane) {
         this.platformId = platformId;
         this.gameId = gameId;
         this.champion = champion;
@@ -33,19 +33,19 @@ public class Game implements Parcelable {
         this.platformId = platformId;
     }
 
-    public int getGameId() {
+    public long getGameId() {
         return gameId;
     }
 
-    public void setGameId(int gameId) {
+    public void setGameId(long gameId) {
         this.gameId = gameId;
     }
 
-    public int getChampion() {
+    public Champion getChampion() {
         return champion;
     }
 
-    public void setChampion(int champion) {
+    public void setChampion(Champion champion) {
         this.champion = champion;
     }
 
@@ -90,6 +90,20 @@ public class Game implements Parcelable {
     }
 
     @Override
+    public String toString() {
+        return "Game{" +
+                "platformId='" + platformId + '\'' +
+                ", gameId=" + gameId +
+                ", champion=" + champion +
+                ", queue=" + queue +
+                ", season=" + season +
+                ", timestamp=" + timestamp +
+                ", role='" + role + '\'' +
+                ", lane='" + lane + '\'' +
+                '}';
+    }
+
+    @Override
     public int describeContents() {
         return 0;
     }
@@ -97,8 +111,8 @@ public class Game implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.platformId);
-        dest.writeInt(this.gameId);
-        dest.writeInt(this.champion);
+        dest.writeLong(this.gameId);
+        dest.writeValue(this.champion);
         dest.writeInt(this.queue);
         dest.writeInt(this.season);
         dest.writeInt(this.timestamp);
@@ -108,8 +122,8 @@ public class Game implements Parcelable {
 
     public Game(Parcel in){
         this.platformId = in.readString();
-        this.gameId = in.readInt();
-        this.champion = in.readInt();
+        this.gameId = in.readLong();
+        this.champion = (Champion) in.readValue(Champion.class.getClassLoader());
         this.queue = in.readInt();
         this.season = in.readInt();
         this.timestamp = in.readInt();

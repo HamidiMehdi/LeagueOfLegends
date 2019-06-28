@@ -5,19 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/dark"
-    android:paddingRight="40dp"
-    android:paddingLeft="40dp"
     android:orientation="vertical"
     android:id="@+id/activity_game_history"
     tools:context=".GameHistoryActivity">
 
-    <TextView
-        android:id="@+id/test"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textSize="16dp"
-        android:fontFamily="@font/montserrat"
-        android:textColor="@color/white" />
+    <ListView
+        android:id="@+id/lv_history_games"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

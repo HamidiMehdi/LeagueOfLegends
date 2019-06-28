@@ -1,12 +1,132 @@
 package com.quizzy.mrk.leagueoflegends.Entities;
 
+import java.util.ArrayList;
+
 public class GameStat {
 
+    private Game game;
+    private int gameDuration;
     private String gameMode;
-    private int mapId;
-    private String gameType;
+    private int ChampLevel;
+    private int gold;
+    private int kill;
+    private int death;
+    private int assist;
+    private ArrayList<Spell> spells;
+    private ArrayList<String> items;
+    private ArrayList<Champion> teamWin;
+    private ArrayList<Champion> teamLose;
 
+    public GameStat(Game game, int gameDuration, String gameMode, int champLevel, int gold, int kill,
+                    int death, int assist, ArrayList<Spell> spells, ArrayList<String> items,
+                    ArrayList<Champion> teamWin, ArrayList<Champion> teamLose) {
+        this.game = game;
+        this.gameDuration = gameDuration;
+        this.gameMode = gameMode;
+        this.ChampLevel = champLevel;
+        this.gold = gold;
+        this.kill = kill;
+        this.death = death;
+        this.assist = assist;
+        this.spells = spells;
+        this.items = items;
+        this.teamWin = teamWin;
+        this.teamLose = teamLose;
+    }
 
-    //http://ddragon.leagueoflegends.com/cdn/6.24.1/img/item/3047.png      => item url
+    public Game getGame() {
+        return game;
+    }
 
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public int getGameDuration() {
+        return gameDuration;
+    }
+
+    public void setGameDuration(int gameDuration) {
+        this.gameDuration = gameDuration;
+    }
+
+    public String getGameMode() {
+        return gameMode;
+    }
+
+    public void setGameMode(String gameMode) {
+        this.gameMode = gameMode;
+    }
+
+    public int getChampLevel() {
+        return ChampLevel;
+    }
+
+    public void setChampLevel(int champLevel) {
+        ChampLevel = champLevel;
+    }
+
+    public int getGold() {
+        return gold;
+    }
+
+    public void setGold(int gold) {
+        this.gold = gold;
+    }
+
+    public int getKill() {
+        return kill;
+    }
+
+    public void setKill(int kill) {
+        this.kill = kill;
+    }
+
+    public int getDeath() {
+        return death;
+    }
+
+    public void setDeath(int death) {
+        this.death = death;
+    }
+
+    public int getAssist() {
+        return assist;
+    }
+
+    public void setAssist(int assist) {
+        this.assist = assist;
+    }
+
+    public ArrayList<Spell> getSpells() {
+        return spells;
+    }
+
+    public void setSpells(ArrayList<Spell> spells) {
+        this.spells = spells;
+    }
+
+    public ArrayList<String> getItems() {
+        return items;
+    }
+
+    public void setItems(ArrayList<String> items) {
+        this.items = items;
+    }
+
+    public ArrayList<Champion> getTeamWin() {
+        return teamWin;
+    }
+
+    public void setTeamWin(ArrayList<Champion> teamWin) {
+        this.teamWin = teamWin;
+    }
+
+    public ArrayList<Champion> getTeamLose() {
+        return teamLose;
+    }
+
+    public void setTeamLose(ArrayList<Champion> teamLose) {
+        this.teamLose = teamLose;
+    }
 }
