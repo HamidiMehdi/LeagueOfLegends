@@ -1,6 +1,7 @@
 package com.quizzy.mrk.leagueoflegends.Adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.quizzy.mrk.leagueoflegends.Entities.GameStat;
+import com.quizzy.mrk.leagueoflegends.GameStatActivity;
 import com.quizzy.mrk.leagueoflegends.R;
 import com.squareup.picasso.Picasso;
 
@@ -18,6 +20,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class HistoryGamesAdapter extends ArrayAdapter<GameStat> {
+
     private LayoutInflater inflater;
     private ArrayList<GameStat> gamesStat;
     private Activity context;
@@ -98,6 +101,14 @@ public class HistoryGamesAdapter extends ArrayAdapter<GameStat> {
         int month = date.get(Calendar.MONTH);
         int year = date.get(Calendar.YEAR);
         tvDate.setText(day + "/" + month + "/" + year);
+
+        vItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, GameStatActivity.class);
+                context.startActivity(intent);
+            }
+        });
 
         return vItem;
     }

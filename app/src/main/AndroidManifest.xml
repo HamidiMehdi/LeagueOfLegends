@@ -11,7 +11,8 @@
         android:roundIcon="@drawable/lol"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".GameHistoryActivity"></activity>
+        <activity android:name=".GameStatActivity"></activity>
+        <activity android:name=".GameHistoryActivity" />
         <activity android:name=".SearchPlayerActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>

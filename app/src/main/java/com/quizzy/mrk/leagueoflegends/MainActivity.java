@@ -20,8 +20,7 @@ public class MainActivity extends AppCompatActivity {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                Intent intent;
-                intent = new Intent(MainActivity.this, SearchPlayerActivity.class);
+                Intent intent = new Intent(MainActivity.this, SearchPlayerActivity.class);
                 startActivity(intent);
             }
         }, 2500);
