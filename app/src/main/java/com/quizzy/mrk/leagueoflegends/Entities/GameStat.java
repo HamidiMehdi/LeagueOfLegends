@@ -1,14 +1,17 @@
 package com.quizzy.mrk.leagueoflegends.Entities;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class GameStat {
 
     private Game game;
-    private int gameDuration;
+    private long gameDuration;
     private String gameMode;
     private int ChampLevel;
     private int gold;
+    private int cs;
     private int kill;
     private int death;
     private int assist;
@@ -18,7 +21,7 @@ public class GameStat {
     private ArrayList<Champion> teamWin;
     private ArrayList<Champion> teamLose;
 
-    public GameStat(Game game, int gameDuration, String gameMode, int champLevel, int gold,
+    public GameStat(Game game, long gameDuration, String gameMode, int champLevel, int gold, int cs,
                     int kill, int death, int assist, boolean win, ArrayList<Spell> spells,
                     ArrayList<String> items, ArrayList<Champion> teamWin, ArrayList<Champion> teamLose) {
         this.game = game;
@@ -26,6 +29,7 @@ public class GameStat {
         this.gameMode = gameMode;
         this.ChampLevel = champLevel;
         this.gold = gold;
+        this.cs = cs;
         this.kill = kill;
         this.death = death;
         this.assist = assist;
@@ -44,11 +48,11 @@ public class GameStat {
         this.game = game;
     }
 
-    public int getGameDuration() {
+    public long getGameDuration() {
         return gameDuration;
     }
 
-    public void setGameDuration(int gameDuration) {
+    public void setGameDuration(long gameDuration) {
         this.gameDuration = gameDuration;
     }
 
@@ -74,6 +78,14 @@ public class GameStat {
 
     public void setGold(int gold) {
         this.gold = gold;
+    }
+
+    public int getCs() {
+        return cs;
+    }
+
+    public void setCs(int cs) {
+        this.cs = cs;
     }
 
     public int getKill() {

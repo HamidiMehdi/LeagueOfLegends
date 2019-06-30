@@ -43,7 +43,7 @@ public class GameStatRequest {
                     public void onResponse(JSONObject response) {
                         try {
                             int participantId = getParticipantId(player, response.getJSONArray("participantIdentities"));
-                            int champLevel = 0, gold = 0, kill = 0, death = 0, assist = 0;
+                            int champLevel = 0, gold = 0, cs = 0, kill = 0, death = 0, assist = 0;
                             boolean win = false;
                             ArrayList<Spell> spells = new ArrayList<>();
                             ArrayList<String> items = new ArrayList<>();
@@ -88,6 +88,7 @@ public class GameStatRequest {
                                     win = stat.getBoolean("win");
                                     champLevel = stat.getInt("champLevel");
                                     gold = stat.getInt("goldEarned");
+                                    cs = stat.getInt("totalMinionsKilled") + stat.getInt("neutralMinionsKilled");
                                     kill = stat.getInt("kills");
                                     death = stat.getInt("deaths");
                                     assist = stat.getInt("assists");
@@ -96,10 +97,11 @@ public class GameStatRequest {
 
                             GameStat gameStat = new GameStat(
                                     game,
-                                    response.getInt("gameDuration"),
+                                    response.getLong("gameDuration"),
                                     response.getString("gameMode"),
                                     champLevel,
                                     gold,
+                                    cs,
                                     kill,
                                     death,
                                     assist,
@@ -109,8 +111,6 @@ public class GameStatRequest {
                                     teamWin,
                                     teamLose
                             );
-
-                            Log.d("APP", gameStat.toString());
 
                             callBack.onSuccess(gameStat);
                         } catch (JSONException e) {
@@ -143,7 +143,7 @@ public class GameStatRequest {
         int participantId = 0;
         for (int i = 0; i < json.length(); i++) {
             JSONObject participant = json.getJSONObject(i);
-            if (participant.getJSONObject("player").getString("accountId") == player.getAccountId()) {
+            if (participant.getJSONObject("player").getString("accountId").equals(player.getAccountId())) {
                 participantId = participant.getInt("participantId");
                 break;
             }

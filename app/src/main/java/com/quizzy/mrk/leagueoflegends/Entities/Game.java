@@ -10,11 +10,11 @@ public class Game implements Parcelable {
     private Champion champion;
     private int queue;
     private int season;
-    private int timestamp;
+    private long timestamp;
     private String role;
     private String lane;
 
-    public Game(String platformId, long gameId, Champion champion, int queue, int season, int timestamp, String role, String lane) {
+    public Game(String platformId, long gameId, Champion champion, int queue, int season, long timestamp, String role, String lane) {
         this.platformId = platformId;
         this.gameId = gameId;
         this.champion = champion;
@@ -65,11 +65,11 @@ public class Game implements Parcelable {
         this.season = season;
     }
 
-    public int getTimestamp() {
+    public long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(int timestamp) {
+    public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -115,7 +115,7 @@ public class Game implements Parcelable {
         dest.writeValue(this.champion);
         dest.writeInt(this.queue);
         dest.writeInt(this.season);
-        dest.writeInt(this.timestamp);
+        dest.writeLong(this.timestamp);
         dest.writeString(this.role);
         dest.writeString(this.lane);
     }
@@ -126,7 +126,7 @@ public class Game implements Parcelable {
         this.champion = (Champion) in.readValue(Champion.class.getClassLoader());
         this.queue = in.readInt();
         this.season = in.readInt();
-        this.timestamp = in.readInt();
+        this.timestamp = in.readLong();
         this.role = in.readString();
         this.lane = in.readString();
     }

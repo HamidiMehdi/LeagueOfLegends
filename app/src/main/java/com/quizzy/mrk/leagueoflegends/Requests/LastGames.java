@@ -51,14 +51,14 @@ public class LastGames {
                                                 ChampionService.getChampionService().getChampion(game.getInt("champion")),
                                                 game.getInt("queue"),
                                                 game.getInt("season"),
-                                                game.getInt("timestamp"),
+                                                game.getLong("timestamp"),
                                                 game.getString("role"),
                                                 game.getString("lane")
                                         )
                                 );
                             }
 
-                            callBack.onSuccess(listGames);
+                            callBack.onSuccess(sortGames(listGames));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -76,6 +76,26 @@ public class LastGames {
                 }
         );
         queue.add(request);
+    }
+
+    private ArrayList<Game> sortGames(ArrayList<Game> games) {
+        ArrayList<Game> sortGames = new ArrayList<>();
+
+        while (games.size() != 0) {
+            int index = 0;
+            long timestamp = 0;
+            for (int i = 0; i < games.size(); i++) {
+                if (games.get(i).getTimestamp() > timestamp) {
+                    timestamp = games.get(i).getTimestamp();
+                    index = i;
+                }
+            }
+            sortGames.add(games.get(index));
+            games.remove(index);
+            timestamp = 0;
+        }
+
+        return sortGames;
     }
 
     public interface LastGamesCallback {
