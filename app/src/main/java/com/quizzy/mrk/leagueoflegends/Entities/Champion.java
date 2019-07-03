@@ -1,6 +1,9 @@
 package com.quizzy.mrk.leagueoflegends.Entities;
 
-public class Champion {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Champion implements Parcelable {
 
     private String id;
     private int key;
@@ -81,4 +84,39 @@ public class Champion {
                 ", img='" + img + '\'' +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeInt(this.key);
+        dest.writeString(this.name);
+        dest.writeString(this.title);
+        dest.writeString(this.blurb);
+        dest.writeString(this.img);
+    }
+
+    public Champion(Parcel in) {
+        this.id = in.readString();
+        this.key = in.readInt();
+        this.name = in.readString();
+        this.title = in.readString();
+        this.blurb = in.readString();
+        this.img = in.readString();
+    }
+
+    public static final Creator<Champion> CREATOR = new Creator<Champion>() {
+
+        public Champion createFromParcel(Parcel source) {
+            return new Champion(source);
+        }
+
+        public Champion[] newArray(int size) {
+            return new Champion[size];
+        }
+    };
 }

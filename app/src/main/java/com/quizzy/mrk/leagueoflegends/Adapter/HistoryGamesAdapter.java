@@ -2,6 +2,7 @@ package com.quizzy.mrk.leagueoflegends.Adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,7 +40,7 @@ public class HistoryGamesAdapter extends ArrayAdapter<GameStat> {
             vItem = context.getLayoutInflater().inflate(R.layout.adapter_history_game, parent, false);
         }
 
-        GameStat gameStat = gamesStat.get(position);
+        final GameStat gameStat = gamesStat.get(position);
 
         View view = vItem.findViewById(R.id.win_or_lose);
         CardView cv = vItem.findViewById(R.id.cardview);
@@ -105,7 +106,10 @@ public class HistoryGamesAdapter extends ArrayAdapter<GameStat> {
         vItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle paquet = new Bundle();
+                paquet.putParcelable("gameStat", gameStat);
                 Intent intent = new Intent(context, GameStatActivity.class);
+                intent.putExtras(paquet);
                 context.startActivity(intent);
             }
         });

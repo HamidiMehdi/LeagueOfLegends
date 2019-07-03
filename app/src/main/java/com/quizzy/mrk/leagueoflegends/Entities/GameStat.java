@@ -1,10 +1,11 @@
 package com.quizzy.mrk.leagueoflegends.Entities;
 
-import org.json.JSONObject;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.util.ArrayList;
 
-public class GameStat {
+public class GameStat implements Parcelable {
 
     private Game game;
     private long gameDuration;
@@ -170,4 +171,63 @@ public class GameStat {
                 ", teamLose=" + teamLose +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeValue(this.game);
+        dest.writeLong(this.gameDuration);
+        dest.writeString(this.gameMode);
+        dest.writeInt(this.ChampLevel);
+        dest.writeInt(this.gold);
+        dest.writeInt(this.cs);
+        dest.writeInt(this.kill);
+        dest.writeInt(this.death);
+        dest.writeInt(this.assist);
+        dest.writeInt((byte) (this.win ? 1 : 0));
+        dest.writeList(this.spells);
+        dest.writeList(this.items);
+        dest.writeList(this.teamWin);
+        dest.writeList(this.teamLose);
+    }
+
+    public GameStat(Parcel in){
+        this.game = (Game) in.readValue(Game.class.getClassLoader());
+        this.gameDuration = in.readLong();
+        this.gameMode = in.readString();
+        this.ChampLevel = in.readInt();
+        this.gold = in.readInt();
+        this.cs = in.readInt();
+        this.kill = in.readInt();
+        this.death = in.readInt();
+        this.assist = in.readInt();
+        this.win = in.readInt() == 1;
+
+        this.spells = new ArrayList<Spell>();
+        in.readList(this.spells, getClass().getClassLoader());
+
+        this.items = new ArrayList<String>();
+        in.readList(this.items, getClass().getClassLoader());
+
+        this.teamWin = new ArrayList<Champion>();
+        in.readList(this.teamWin, getClass().getClassLoader());
+
+        this.teamLose = new ArrayList<Champion>();
+        in.readList(this.teamLose, getClass().getClassLoader());
+    }
+
+    public static final Creator<GameStat> CREATOR = new Creator<GameStat>() {
+
+        public GameStat createFromParcel(Parcel source){
+            return new GameStat(source);
+        }
+
+        public GameStat[] newArray(int size){
+            return new GameStat[size];
+        }
+    };
 }

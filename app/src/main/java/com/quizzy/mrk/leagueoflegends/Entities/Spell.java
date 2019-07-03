@@ -1,6 +1,9 @@
 package com.quizzy.mrk.leagueoflegends.Entities;
 
-public class Spell {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Spell implements Parcelable {
 
     private String id;
     private String name;
@@ -70,4 +73,37 @@ public class Spell {
                 ", img='" + img + '\'' +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.description);
+        dest.writeInt(this.key);
+        dest.writeString(this.img);
+    }
+
+    public Spell(Parcel in){
+        this.id = in.readString();
+        this.name = in.readString();
+        this.description = in.readString();
+        this.key = in.readInt();
+        this.img = in.readString();
+    }
+
+    public static final Creator<Spell> CREATOR = new Creator<Spell>() {
+
+        public Spell createFromParcel(Parcel source){
+            return new Spell(source);
+        }
+
+        public Spell[] newArray(int size){
+            return new Spell[size];
+        }
+    };
 }

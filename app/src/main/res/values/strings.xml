@@ -10,6 +10,9 @@
     <string name="et_error_empty">This field cannot be empty</string>
     <string name="player_not_found">Player not found</string>
 
+    <string name="icon_game">Game</string>
+    <string name="icon_stat">Stat</string>
+
 
     <string name="error_volley">Volley error</string>
     <string name="error_network">Network error</string>
