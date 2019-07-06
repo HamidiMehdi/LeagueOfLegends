@@ -4,9 +4,11 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -129,18 +131,23 @@ public class GameStatActivity extends AppCompatActivity {
 
             switch (item.getItemId()) {
                 case R.id.game :
-                    fragment = GameFragment.newInstance(gameStat);
+                    showFragment(GameFragment.newInstance(gameStat));
                     break;
                 case R.id.stat :
-                    fragment = StatFragment.newInstance(gameStat);
+                    showFragment(StatFragment.newInstance(gameStat));
                     break;
             }
-
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, fragment).commit();
 
             return true;
         }
     };
+
+    private void showFragment(Fragment fragment) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .commit();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
