@@ -3,6 +3,7 @@ package com.quizzy.mrk.leagueoflegends;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -37,6 +38,9 @@ public class SearchPlayerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_player);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();
 
         this.spRegion = findViewById(R.id.region);
         this.etPlayerName = findViewById(R.id.player_name);

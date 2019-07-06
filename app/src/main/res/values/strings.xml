@@ -12,6 +12,8 @@
 
     <string name="icon_game">Game</string>
     <string name="icon_stat">Stat</string>
+    <string name="lvl_champ">Level</string>
+    <string name="game">Game</string>
 
 
     <string name="error_volley">Volley error</string>

@@ -4,19 +4,205 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/dark"
     tools:context=".GameStatActivity">
 
-    <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/bottom_nav"/>
+    <RelativeLayout
+        android:id="@+id/rl_infos_joueur"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/win_row_bg"
+        android:padding="10dp">
+
+
+        <ImageView
+            android:id="@+id/iv_details_portrait"
+            android:layout_width="70dp"
+            android:layout_height="70dp" />
+
+        <ImageView
+            android:id="@+id/iv_details_sum1"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/iv_details_portrait"
+            android:layout_marginTop="5dp" />
+
+        <ImageView
+            android:id="@+id/iv_details_sum2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_below="@+id/iv_details_portrait"
+            android:layout_marginTop="5dp"
+            android:layout_toRightOf="@+id/iv_details_sum1" />
+
+        <TextView
+            android:id="@+id/tv_details_type_match"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_details_portrait"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_details_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_details_type_match"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toRightOf="@+id/iv_details_portrait"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/white"
+            android:textSize="14dp" />
+
+        <ImageView
+            android:id="@+id/iv_details_gold"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/tv_details_level"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_details_portrait"
+            android:src="@drawable/scoreboardicon_gold" />
+
+        <TextView
+            android:id="@+id/tv_details_gold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/iv_details_gold"
+            android:layout_toRightOf="@+id/iv_details_gold"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/white"
+            android:textSize="12dp" />
+
+        <ImageView
+            android:id="@+id/iv_details_cs"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/tv_details_level"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/tv_details_gold"
+            android:src="@drawable/cs" />
+
+        <TextView
+            android:id="@+id/tv_details_cs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/iv_details_cs"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/iv_details_cs"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/white"
+            android:textSize="12dp" />
+
+        <ImageView
+            android:id="@+id/iv_details_kda"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_below="@+id/tv_details_level"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/tv_details_cs"
+            android:src="@drawable/kda" />
+
+        <TextView
+            android:id="@+id/tv_details_kda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/iv_details_kda"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/iv_details_kda"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/white"
+            android:textSize="12dp" />
+
+        <ImageView
+            android:id="@+id/iv_details_item1"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignBottom="@+id/iv_details_sum2"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv_details_sum2" />
+
+        <ImageView
+            android:id="@+id/iv_details_item2"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignBottom="@+id/iv_details_item1"
+            android:layout_toRightOf="@+id/iv_details_item1" />
+
+        <ImageView
+            android:id="@+id/iv_details_item3"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignBottom="@+id/iv_details_item2"
+            android:layout_toRightOf="@+id/iv_details_item2" />
+
+        <ImageView
+            android:id="@+id/iv_details_item4"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignBottom="@+id/iv_details_item3"
+            android:layout_toRightOf="@+id/iv_details_item3" />
+
+        <ImageView
+            android:id="@+id/iv_details_item5"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignBottom="@+id/iv_details_item4"
+            android:layout_toRightOf="@+id/iv_details_item4" />
+
+        <ImageView
+            android:id="@+id/iv_details_item6"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignBottom="@+id/iv_details_item5"
+            android:layout_toRightOf="@+id/iv_details_item5" />
+
+        <ImageView
+            android:id="@+id/iv_details_item7"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignBottom="@+id/iv_details_item6"
+            android:layout_toRightOf="@+id/iv_details_item6" />
+
+        <TextView
+            android:id="@+id/tv_details_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_details_creation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_details_duration"
+            android:layout_alignParentRight="true"
+            android:fontFamily="@font/montserrat"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/navigation_game_stat"/>
+        android:layout_below="@+id/rl_infos_joueur"
+        android:background="@color/pressed"
+        app:itemTextColor="@drawable/navigation_bottom_color"
+        app:itemIconTint="@drawable/navigation_bottom_color"
+        app:menu="@menu/navigation_game_stat" />
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/bottom_nav" />
 
 </RelativeLayout>
